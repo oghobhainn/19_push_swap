@@ -15,8 +15,8 @@ void	rab_action(int *stack, int len_stack)
 	stack[len_stack - 1] = tmp;
 }
 
-void	rr_action(int *stack_a, int *stack_b, int len_stack)
+void	rr_action(t_check *c)
 {
-	rab_action(stack_a, len_stack);
-	rab_action(stack_b, len_stack);
+	rab_action(c->stack_a, c->len_a);
+	rab_action(c->stack_b, c->len_b);
 }

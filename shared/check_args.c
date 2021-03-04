@@ -1,4 +1,4 @@
-#include "checker.h"
+#include "../shared.h"
 
 int		check_doubles(int *stack)
 {

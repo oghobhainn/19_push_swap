@@ -1,4 +1,4 @@
-#include "checker.h"
+#include "../shared.h"
 
 int		*malloc_and_fill(int size)
 {

@@ -1,4 +1,4 @@
-#include "checker.h"
+#include "../shared.h"
 
 void	ft_exit(char *msg, int a)
 {
