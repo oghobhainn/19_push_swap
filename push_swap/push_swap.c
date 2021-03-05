@@ -25,9 +25,6 @@ int		check_if_sorted(t_check *c)
 
 void	push_swap(t_check *c, int algo)
 {
-	//printf("we using the algo [%d]\n", algo);
-	//if (algo == 0)
-	//	bubble_sort(c, c->init_len_a);
 	if (check_if_sorted(c) == 1)
 		return ;
 	else if (c->init_len_a <= 3)
@@ -36,7 +33,7 @@ void	push_swap(t_check *c, int algo)
 	}
 	else if (c->init_len_a <= 6)
 	{
-		case_five(c, c->init_len_a);
+		case_six(c, c->init_len_a);
 	}
 	else if (c->init_len_a <= 100)
 	{

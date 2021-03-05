@@ -16,6 +16,6 @@ int		pa(t_check *c);
 void	case_three(int *stack, int n, int ab);
 void	r_case_three(int *stack, int n, int ab);
 
-void	case_five(t_check *c, int n);
+void	case_six(t_check *c, int n);
 
 #endif

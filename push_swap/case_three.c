@@ -51,6 +51,8 @@ void		case_three(int *stack, int n, int ab)
 	else
 	{
 		mid = stack[1];
+		if (bot == mid || mid == top || top == mid)
+			ft_exit("duplicates\n", 2);
 		if (top > mid && top < bot)
 			sab(stack, n, ab);
 		else if (top > mid && top > bot && mid > bot)

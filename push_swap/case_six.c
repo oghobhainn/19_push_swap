@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void		case_five(t_check *c, int n)
+void		case_six(t_check *c, int n)
 {
 	int i;
 
@@ -13,7 +13,7 @@ void		case_five(t_check *c, int n)
 	{
 		if (c->stack_b[0] <= c->stack_a[0])
 			pa(c);
-		else if (c->stack_b[0] > c->stack_a[0]
+		else if (c->stack_b[0] >= c->stack_a[0]
 			&& c->stack_b[0] >= c->stack_a[c->len_a - 1]
 			&& c->stack_a[0] <= c->stack_a[1]
 			&& c->stack_a[0] <= c->stack_a[c->len_a -1])
