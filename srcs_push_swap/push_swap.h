@@ -18,4 +18,6 @@ void	r_case_three(int *stack, int n, int ab);
 
 void	case_six(t_check *c, int n);
 
+void	case_hundred(t_check *c, int n);
+
 #endif

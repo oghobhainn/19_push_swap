@@ -37,10 +37,11 @@ void	push_swap(t_check *c, int algo)
 	}
 	else if (c->init_len_a <= 100)
 	{
-		printf("case with less than 100 numbers\n");
+		case_hundred(c, c->init_len_a);
 	}
 	else
-		printf("more than 100 numbers\n");
+		case_hundred(c, c->init_len_a);
+
 }
 
 
