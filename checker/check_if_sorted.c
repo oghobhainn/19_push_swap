@@ -9,7 +9,7 @@ int		check_if_sorted(t_check *c)
 		return (0);
 	while (i < c->len_a - 1)
 	{
-		printf("comparing [%d] and [%d]\n", c->stack_a[i], c->stack_a[i+1]);
+		//printf("comparing [%d] and [%d]\n", c->stack_a[i], c->stack_a[i+1]);
 		if (c->stack_a[i] == c->stack_a[i + 1])
 		{
 			free(c->stack_a);

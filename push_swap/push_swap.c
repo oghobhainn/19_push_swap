@@ -32,9 +32,9 @@ void	push_swap(t_check *c, int algo)
 		return ;
 	else if (c->init_len_a <= 3)
 	{
-		case_three(c, c->init_len_a);
+		case_three(c->stack_a, c->init_len_a, 1);
 	}
-	else if (c->init_len_a <= 5)
+	else if (c->init_len_a <= 6)
 	{
 		case_five(c, c->init_len_a);
 	}
