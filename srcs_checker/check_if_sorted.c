@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_if_sorted.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 16:43:50 by cmcgahan          #+#    #+#             */
+/*   Updated: 2021/03/08 16:44:30 by cmcgahan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int		check_if_sorted(t_check *c)
@@ -9,7 +21,6 @@ int		check_if_sorted(t_check *c)
 		return (0);
 	while (i < c->len_a - 1)
 	{
-		//printf("comparing [%d] and [%d]\n", c->stack_a[i], c->stack_a[i+1]);
 		if (c->stack_a[i] == c->stack_a[i + 1])
 		{
 			free(c->stack_a);

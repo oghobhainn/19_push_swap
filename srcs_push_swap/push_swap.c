@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 16:51:04 by cmcgahan          #+#    #+#             */
+/*   Updated: 2021/03/08 16:51:23 by cmcgahan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int		check_if_sorted(t_check *c)
@@ -9,7 +21,6 @@ int		check_if_sorted(t_check *c)
 		return (0);
 	while (i < c->len_a - 1)
 	{
-		//printf("comparing [%d] and [%d]\n", c->stack_a[i], c->stack_a[i+1]);
 		if (c->stack_a[i] == c->stack_a[i + 1])
 		{
 			free(c->stack_a);
@@ -42,7 +53,6 @@ void	push_swap(t_check *c, int algo)
 	else
 		case_hundred(c, c->init_len_a);
 }
-
 
 int		main(int argc, char **argv)
 {

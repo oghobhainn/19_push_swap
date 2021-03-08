@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pab.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 16:50:29 by cmcgahan          #+#    #+#             */
+/*   Updated: 2021/03/08 16:50:51 by cmcgahan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	intptrcpy(int *src, int *dest, int len)
@@ -62,7 +74,6 @@ int		pb(t_check *c)
 		c->len_a--;
 		free(c->stack_a);
 		c->stack_a = new_stack;
-
 	}
 	return (1);
 }
@@ -81,7 +92,7 @@ int		pa(t_check *c)
 			return (0);
 		c->len_b--;
 		free(c->stack_b);
-		c->stack_b = new_stack; 
+		c->stack_b = new_stack;
 	}
 	else if (c->len_b == 1)
 	{

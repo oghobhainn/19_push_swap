@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 16:43:44 by cmcgahan          #+#    #+#             */
+/*   Updated: 2021/03/08 16:44:13 by cmcgahan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int		is_valid(char *s)
 {
 	if (ft_strcmp(s, "sa") == 0
-			|| ft_strcmp(s, "sb") == 0 // use ft_strcmp !
+			|| ft_strcmp(s, "sb") == 0
 			|| ft_strcmp(s, "ss") == 0
 			|| ft_strcmp(s, "pa") == 0
 			|| ft_strcmp(s, "pb") == 0
@@ -17,7 +29,7 @@ int		is_valid(char *s)
 	{
 		return (1);
 	}
-		return (0);
+	return (0);
 }
 
 void	use_action(t_check *c, char *action)

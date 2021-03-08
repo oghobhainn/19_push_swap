@@ -1,9 +1,5 @@
 #include "push_swap.h"
 
-/*
-** return l'index du plus grand
-*/
-
 int			find_max(int *stack, int n)
 {
 	int		i;
@@ -24,10 +20,6 @@ int			find_max(int *stack, int n)
 	}
 	return (max_ix);
 }
-
-/*
-** return l'index du plus petit
-*/
 
 int			find_min(int *stack, int n)
 {
@@ -68,7 +60,7 @@ void		min_or_max(int len, t_ps *ps)
 		ps->flag_minmax = 1;
 		ps->dist = min_dist;
 		if (ps->min <= len / 2)
-			ps->direction = 1; //on monte;
+			ps->direction = 1;
 		else
 			ps->direction = -1;
 	}
@@ -85,7 +77,7 @@ void		min_or_max(int len, t_ps *ps)
 
 void		sort_upper_half(t_check *c, int n, t_ps *ps)
 {
-	while (ps->i < n && c->len_b <= c->len_a) // all the below-median values to the right
+	while (ps->i < n && c->len_b <= c->len_a)
 	{
 		if (c->stack_a[0] <= ps->median_value)
 			pb(c);
@@ -118,8 +110,8 @@ void		sort_upper_half(t_check *c, int n, t_ps *ps)
 					rab(c->stack_b, c->len_b, 2);
 					ps->dist--;
 				}
-				pa(c); //on met sur la stack a
-				rab(c->stack_a, c->len_a, 1); //et comme c'est le min, on le met tout en dessous
+				pa(c);
+				rab(c->stack_a, c->len_a, 1);
 			}
 			else
 			{
@@ -141,7 +133,7 @@ void		sort_upper_half(t_check *c, int n, t_ps *ps)
 					rab(c->stack_b, c->len_b, 2);
 					ps->dist--;
 				}
-				pa(c); //on met sur la stack a
+				pa(c);
 			}
 			else
 			{
@@ -154,7 +146,6 @@ void		sort_upper_half(t_check *c, int n, t_ps *ps)
 			}
 			ps->bigs++;
 		}
-		//sleep(1);
 	}
 	while (ps->bigs-- > 1)
 		rab(c->stack_a, c->len_a, 1);
@@ -162,7 +153,7 @@ void		sort_upper_half(t_check *c, int n, t_ps *ps)
 
 void		sort_lower_half(t_check *c, int n, t_ps *ps)
 {
-	while (ps->i < n && c->len_b < c->len_a) // all the below-median values to the right
+	while (ps->i < n && c->len_b < c->len_a)
 	{
 		if (c->stack_a[0] >= ps->median_value)
 			pb(c);
@@ -175,17 +166,6 @@ void		sort_lower_half(t_check *c, int n, t_ps *ps)
 		ps->min = find_min(c->stack_b, c->len_b);
 		ps->max = find_max(c->stack_b, c->len_b);
 		min_or_max(c->len_b, ps); 
-		//on regarde si il vaut mieux chercher le min ou le max : flag_minmax vaut 1 si on cherche le min, 2 si on cherche le max
-		//ps->dist aura la distance la plus courte
-		//ps->direction aura la direction (1 si on monte rab, -1 si on descend rrab)
-		
-		// d'abord on definit si on cherche le min ou le max : lequel est le plus proche des extremites ?
-		// si c'est le min : ecq il est plus proche du top ou du bot ?
-			// si il est plus proche du top: on le fait remonter, transfert vers stack_a, et rotate pour qu'il soit tout en dessous
-			// si il est plus proche du bot: on le fait descendre, transfert vers stack_a, et rotate pour qu'il soit tout en dessous
-		// si c'est le max : ecq il est plus proche du top ou du bot ?
-			// si il est plus proche du top: on le fait remonter, et transfert vers stack_a
-			// si il est plus proche du bot: on le fait descendre, et transfert vers stack_a
 		if (ps->flag_minmax == 1)
 		{
 			if (ps->direction == 1)
@@ -195,8 +175,8 @@ void		sort_lower_half(t_check *c, int n, t_ps *ps)
 					rab(c->stack_b, c->len_b, 2);
 					ps->dist--;
 				}
-				pa(c); //on met sur la stack a
-				rab(c->stack_a, c->len_a, 1); //et comme c'est le min, on le met tout en dessous
+				pa(c);
+				rab(c->stack_a, c->len_a, 1);
 			}
 			else
 			{
@@ -218,7 +198,7 @@ void		sort_lower_half(t_check *c, int n, t_ps *ps)
 					rab(c->stack_b, c->len_b, 2);
 					ps->dist--;
 				}
-				pa(c); //on met sur la stack a
+				pa(c);
 			}
 			else
 			{
@@ -231,9 +211,8 @@ void		sort_lower_half(t_check *c, int n, t_ps *ps)
 			}
 			ps->bigs++;
 		}
-		//sleep(1);
 	}
-	while (ps->bigs-- > 0)
+	while (--ps->bigs > 0)
 		rab(c->stack_a, c->len_a, 1);
 }
 

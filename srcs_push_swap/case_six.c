@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   case_six.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 16:48:21 by cmcgahan          #+#    #+#             */
+/*   Updated: 2021/03/08 16:48:38 by cmcgahan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void		case_six(t_check *c, int n)
@@ -16,12 +28,13 @@ void		case_six(t_check *c, int n)
 		else if (c->stack_b[0] >= c->stack_a[0]
 			&& c->stack_b[0] >= c->stack_a[c->len_a - 1]
 			&& c->stack_a[0] <= c->stack_a[1]
-			&& c->stack_a[0] <= c->stack_a[c->len_a -1])
+			&& c->stack_a[0] <= c->stack_a[c->len_a - 1])
 			pa(c);
 		else
 			rab(c->stack_a, c->len_a, 1);
 	}
-	while (!(c->stack_a[0] <= c->stack_a[1] && c->stack_a[0] <= c->stack_a[c->len_a - 1]))
+	while (!(c->stack_a[0] <= c->stack_a[1]
+				&& c->stack_a[0] <= c->stack_a[c->len_a - 1]))
 	{
 		rab(c->stack_a, c->len_a, 1);
 	}
