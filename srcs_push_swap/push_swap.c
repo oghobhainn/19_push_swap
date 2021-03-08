@@ -27,7 +27,7 @@ void	push_swap(t_check *c, int algo)
 {
 	if (check_if_sorted(c) == 1)
 		return ;
-	else if (c->init_len_a <= 3)
+	if (c->init_len_a <= 3)
 	{
 		case_three(c->stack_a, c->init_len_a, 1);
 	}
@@ -41,7 +41,6 @@ void	push_swap(t_check *c, int algo)
 	}
 	else
 		case_hundred(c, c->init_len_a);
-
 }
 
 

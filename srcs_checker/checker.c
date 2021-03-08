@@ -23,26 +23,26 @@ void	checker(t_check *c)
 	while (again > 0)
 	{
 		print_stack(c);
-
-//		printf("\naction possible : [sa - sb - ss - pa - pb - ra - rb - rr - rra - rrb - rrr - q (quit)]\n\t-> ");
 		again = get_next_line(0, &action);
 		while (is_valid(action) == 0 && again != 0)
 		{
-//			printf("not a valid action, try again\n");
-//			printf("\naction possible : [sa - sb - ss - pa - pb - ra - rb - rr - rra - rrb - rrr - q (quit)]\n\t-> ");
+			write(1, action, ft_strlen(action));
+			write(1, "\n", 1);
+			free(action);
 			again = get_next_line(0, &action);	
 		}
 		if (again != 0)
 		{
 			nb_action++;
 			use_action(c, action);
+			free(action);
 		}
 	}
 	printf("we used [%d] actions to sort it\n", nb_action);
 	if (check_if_sorted(c) == 1)
-		printf("sorted !\n");
+		write(1, "OK\n", 3);
 	else
-		printf("not sorted...\n");
+		write(1, "KO\n", 3);
 }
 
 int		main(int argc, char **argv)

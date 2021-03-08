@@ -10,11 +10,11 @@ void	print_stack(t_check *c)
 	while (i < c->len_a || i < c->len_b)
 	{
 		if (i < c->len_a && i < c->len_b)
-			printf("    [%d] || [%d]\n", c->stack_a[i], c->stack_b[i]);
+			printf("    [%d] 	|| 	[%d]\n", c->stack_a[i], c->stack_b[i]);
 		else if (i < c->len_a)
-			printf("    [%d] ||\n", c->stack_a[i]);
+			printf("    [%d] 	||\n", c->stack_a[i]);
 		else if (i < c->len_b)
-			printf("        || [%d]\n", c->stack_b[i]);
+			printf("        	|| 	[%d]\n", c->stack_b[i]);
 		i++;
 	}
 	printf("\n");

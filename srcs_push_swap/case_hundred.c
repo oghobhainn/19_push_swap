@@ -1,5 +1,9 @@
 #include "push_swap.h"
 
+/*
+** return l'index du plus grand
+*/
+
 int			find_max(int *stack, int n)
 {
 	int		i;
@@ -20,6 +24,10 @@ int			find_max(int *stack, int n)
 	}
 	return (max_ix);
 }
+
+/*
+** return l'index du plus petit
+*/
 
 int			find_min(int *stack, int n)
 {
@@ -43,66 +51,210 @@ int			find_min(int *stack, int n)
 
 }
 
-void		case_hundred(t_check *c, int n)
+void		min_or_max(int len, t_ps *ps)
 {
-	int		i;
-	int		j;
-	int		median;
-	int		min;
-	int		max;
-	int		direction;
-
-	i = 0;
-	median = 1000;
-	while (i < n)
+	int		min_dist;
+	int		max_dist;
+	if (ps->min <= len / 2)
+		min_dist = ps->min;
+	else
+		min_dist = len - ps->min;
+	if (ps->max <= len / 2)
+		max_dist = ps->max;
+	else
+		max_dist = len - ps->max;
+	if (min_dist <= max_dist)
 	{
-		if (c->stack_a[0] <= median)
+		ps->flag_minmax = 1;
+		ps->dist = min_dist;
+		if (ps->min <= len / 2)
+			ps->direction = 1; //on monte;
+		else
+			ps->direction = -1;
+	}
+	else
+	{
+		ps->flag_minmax = 2;
+		ps->dist = max_dist;
+		if (ps->max <= len / 2)
+			ps->direction = 1;
+		else
+			ps->direction = -1;
+	}
+}
+
+void		sort_upper_half(t_check *c, int n, t_ps *ps)
+{
+	while (ps->i < n && c->len_b <= c->len_a) // all the below-median values to the right
+	{
+		if (c->stack_a[0] <= ps->median_value)
 			pb(c);
 		else
 			rab(c->stack_a, c->len_a, 1);
-		i++;
+		ps->i++;	
 	}
 	while (c->len_b > 0)
 	{
-		min = find_min(c->stack_b, c->len_b);
-		max = find_max(c->stack_b, c->len_b);
-		//printf("min is at index [%d]\n", min);
-//		printf("max is at index [%d]\n", max);
-/*		if (min > c->len_b / 2)
+		ps->min = find_min(c->stack_b, c->len_b);
+		ps->max = find_max(c->stack_b, c->len_b);
+		min_or_max(c->len_b, ps); 
+		//on regarde si il vaut mieux chercher le min ou le max : flag_minmax vaut 1 si on cherche le min, 2 si on cherche le max
+		//ps->dist aura la distance la plus courte
+		//ps->direction aura la direction (1 si on monte rab, -1 si on descend rrab)
+		
+		// d'abord on definit si on cherche le min ou le max : lequel est le plus proche des extremites ?
+		// si c'est le min : ecq il est plus proche du top ou du bot ?
+			// si il est plus proche du top: on le fait remonter, transfert vers stack_a, et rotate pour qu'il soit tout en dessous
+			// si il est plus proche du bot: on le fait descendre, transfert vers stack_a, et rotate pour qu'il soit tout en dessous
+		// si c'est le max : ecq il est plus proche du top ou du bot ?
+			// si il est plus proche du top: on le fait remonter, et transfert vers stack_a
+			// si il est plus proche du bot: on le fait descendre, et transfert vers stack_a
+		if (ps->flag_minmax == 1)
 		{
-			printf("we go up !\n");
-			direction = 1;
-		}
-		else
-		{
-			printf("we go down !\n");
-			direction = -1;
-		}
-*/		
-		if (max > c->len_b / 2)
-		{
-//			printf("we go up !\n");
-			direction = 1;
-		}
-		else
-		{
-//			printf("we go down !\n");
-			direction = -1;
-		}
-		j = max;
-		while (j > 0 && j < c->len_b)
-		{
-			if (direction == 1)
+			if (ps->direction == 1)
 			{
-				j++;
-				rrab(c->stack_b, c->len_b, 2);
+				while (ps->dist > 0)
+				{
+					rab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c); //on met sur la stack a
+				rab(c->stack_a, c->len_a, 1); //et comme c'est le min, on le met tout en dessous
 			}
 			else
 			{
-				j--;
-				rab(c->stack_b, c->len_b, 2);
+				while (ps->dist > 0)
+				{
+					rrab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c);
+				rab(c->stack_a, c->len_a, 1);
 			}
 		}
-		pa(c);
+		else if (ps->flag_minmax == 2)
+		{
+			if (ps->direction == 1)
+			{
+				while (ps->dist > 0)
+				{
+					rab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c); //on met sur la stack a
+			}
+			else
+			{
+				while (ps->dist > 0)
+				{
+					rrab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c);
+			}
+			ps->bigs++;
+		}
+		//sleep(1);
 	}
+	while (ps->bigs-- > 1)
+		rab(c->stack_a, c->len_a, 1);
+}
+
+void		sort_lower_half(t_check *c, int n, t_ps *ps)
+{
+	while (ps->i < n && c->len_b < c->len_a) // all the below-median values to the right
+	{
+		if (c->stack_a[0] >= ps->median_value)
+			pb(c);
+		else
+			rab(c->stack_a, c->len_a, 1);
+		ps->i++;	
+	}
+	while (c->len_b > 0)
+	{
+		ps->min = find_min(c->stack_b, c->len_b);
+		ps->max = find_max(c->stack_b, c->len_b);
+		min_or_max(c->len_b, ps); 
+		//on regarde si il vaut mieux chercher le min ou le max : flag_minmax vaut 1 si on cherche le min, 2 si on cherche le max
+		//ps->dist aura la distance la plus courte
+		//ps->direction aura la direction (1 si on monte rab, -1 si on descend rrab)
+		
+		// d'abord on definit si on cherche le min ou le max : lequel est le plus proche des extremites ?
+		// si c'est le min : ecq il est plus proche du top ou du bot ?
+			// si il est plus proche du top: on le fait remonter, transfert vers stack_a, et rotate pour qu'il soit tout en dessous
+			// si il est plus proche du bot: on le fait descendre, transfert vers stack_a, et rotate pour qu'il soit tout en dessous
+		// si c'est le max : ecq il est plus proche du top ou du bot ?
+			// si il est plus proche du top: on le fait remonter, et transfert vers stack_a
+			// si il est plus proche du bot: on le fait descendre, et transfert vers stack_a
+		if (ps->flag_minmax == 1)
+		{
+			if (ps->direction == 1)
+			{
+				while (ps->dist > 0)
+				{
+					rab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c); //on met sur la stack a
+				rab(c->stack_a, c->len_a, 1); //et comme c'est le min, on le met tout en dessous
+			}
+			else
+			{
+				while (ps->dist > 0)
+				{
+					rrab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c);
+				rab(c->stack_a, c->len_a, 1);
+			}
+		}
+		else if (ps->flag_minmax == 2)
+		{
+			if (ps->direction == 1)
+			{
+				while (ps->dist > 0)
+				{
+					rab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c); //on met sur la stack a
+			}
+			else
+			{
+				while (ps->dist > 0)
+				{
+					rrab(c->stack_b, c->len_b, 2);
+					ps->dist--;
+				}
+				pa(c);
+			}
+			ps->bigs++;
+		}
+		//sleep(1);
+	}
+	while (ps->bigs-- > 0)
+		rab(c->stack_a, c->len_a, 1);
+}
+
+void		case_hundred(t_check *c, int n)
+{
+	t_ps	ps;
+	int		*sorted;
+
+	ps.i = 0;
+	ps.j = 0;
+	ps.median_value = 0;
+	ps.min = 0;
+	ps.max = 0;
+	ps.direction = 0;
+	sorted = sort_array(c->stack_a, c->len_a);
+	ps.median_value = find_median(sorted, c->len_a, &ps);
+	sort_upper_half(c, n, &ps);
+	ps.i = 0;
+	ps.j = 0;
+	ps.min = 0;
+	ps.max = 0;
+	ps.direction = 0;
+	sort_lower_half(c, n, &ps);
 }

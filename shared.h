@@ -37,5 +37,6 @@ int		*malloc_and_fill(int size);
 int		init_struct(t_check *c, int argc, char **argv);
 void	print_stack(t_check *c);
 int		*get_stack(int argc, char **argv);
+int		*sort_array(int *unsorted, int len);
 
 #endif
