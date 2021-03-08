@@ -51,7 +51,7 @@ void	push_swap(t_check *c, int algo)
 		case_hundred(c, c->init_len_a);
 	}
 	else
-		case_hundred(c, c->init_len_a);
+		case_big(c, c->init_len_a);
 }
 
 int		main(int argc, char **argv)
