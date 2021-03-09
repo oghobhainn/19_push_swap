@@ -11,18 +11,31 @@
 /* ************************************************************************** */
 
 #include "checker.h"
-/*
-void			check_overflows(char **args)
+
+void				check_overflows(char **args)
 {
-	long		i;
+	int				i;
+	long long		test;
 
 	i = 0;
 	while (args[i])
 	{
-
+		if (ft_strlen(args[i]) > ft_strlen("-2147483648"))
+			ft_exit("Error: wrong arg (possibly overflow)\n", 2);
+		else if (ft_strlen(args[i]) == ft_strlen("-2147483648"))
+		{
+			if (args[i][0] != '-' || args[i][0] != '+')
+				ft_exit("Error: wrong arg (possibly overflow)\n", 2);
+			else
+			{
+				if (ft_atoll(args[i]) > INT_MAX || ft_atoll(args[i]) < INT_MIN)
+					ft_exit("Error: overflow\n", 2);
+			}
+		}
+		i++;
 	}
 }
-*/
+
 void			check_duplicates(t_check *c)
 {
 	int			i;
@@ -96,7 +109,7 @@ int		main(int argc, char **argv)
 	{
 		args = argv + 1;
 	}
-//	check_overflows(args);
+	check_overflows(args);
 	if (init_struct(&c, argc, args) == 0)
 		ft_exit("couldn't init struct\n", 2);
 	pre_check_args(&c);

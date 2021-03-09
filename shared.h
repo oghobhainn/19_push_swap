@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
@@ -38,5 +39,7 @@ int		init_struct(t_check *c, int argc, char **argv);
 void	print_stack(t_check *c);
 int		*get_stack(int argc, char **argv);
 int		*sort_array(int *unsorted, int len);
+long long				ft_atoll(char *str);
+
 
 #endif
