@@ -16,6 +16,25 @@
 # define EXAMPLE 0
 # include "../shared.h"
 
+typedef struct	s_big
+{
+	int			i;
+	int			j;
+	int			p1;
+	int			p2;
+	int			p3;
+	int			p4;
+	int			min;
+	int			max;
+	int			dist;
+	int			min_dist;
+	int			max_dist;
+	int			direction;
+	int			flag_minmax;
+	int			smalls;
+	int			bigs;
+}				t_big;
+
 typedef struct	s_ps
 {
 	int			i;
