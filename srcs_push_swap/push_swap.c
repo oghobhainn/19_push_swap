@@ -46,10 +46,10 @@ void	push_swap(t_check *c, int algo)
 	{
 		case_six(c, c->init_len_a);
 	}
-	else if (c->init_len_a <= 100)
-	{
-		case_hundred(c, c->init_len_a);
-	}
+//	else if (c->init_len_a <= 100)
+//	{
+//		case_hundred(c, c->init_len_a);
+//	}
 	else
 		case_big(c, c->init_len_a);
 }

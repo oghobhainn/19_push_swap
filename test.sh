@@ -5,3 +5,4 @@ gcc srcs_push_swap/*.c shared/*.c -o push_swap
 chmod +x push_swap
 ARG=$1
 ./push_swap $ARG | ./checker $ARG
+#example : "ARG=$(cat test_100_4); ./push_swap $ARG | ./checker $ARG"

@@ -79,7 +79,7 @@ void		sort_upper_half(t_check *c, int n, t_ps *ps)
 {
 	while (ps->i < n && c->len_b <= c->len_a)
 	{
-		if (c->stack_a[0] <= ps->median_value)
+		if (c->stack_a[0] < ps->median_value)
 			pb(c);
 		else
 			rab(c->stack_a, c->len_a, 1);
@@ -147,7 +147,7 @@ void		sort_upper_half(t_check *c, int n, t_ps *ps)
 			ps->bigs++;
 		}
 	}
-	while (ps->bigs-- > 1)
+	while (ps->bigs-- > 0)
 		rab(c->stack_a, c->len_a, 1);
 }
 
@@ -212,7 +212,7 @@ void		sort_lower_half(t_check *c, int n, t_ps *ps)
 			ps->bigs++;
 		}
 	}
-	while (--ps->bigs > 0)
+	while (ps->bigs-- > -1)
 		rab(c->stack_a, c->len_a, 1);
 }
 

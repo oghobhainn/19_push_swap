@@ -24,6 +24,13 @@ typedef struct	s_big
 	int			p2;
 	int			p3;
 	int			p4;
+	int			len_p01;
+	int			len_p12;
+	int			len_p23;
+	int			len_p34;
+	int			born1;
+	int			born2;
+	int			len_born;
 	int			min;
 	int			max;
 	int			dist;
@@ -70,5 +77,8 @@ void			r_case_three(int *stack, int n, int ab);
 void			case_six(t_check *c, int n);
 void			case_hundred(t_check *c, int n);
 void			case_big(t_check *c, int n);
+
+int			find_max(int *stack, int n);
+int			find_min(int *stack, int n);
 
 #endif

@@ -40,6 +40,8 @@ void	print_stack(t_check *c);
 int		*get_stack(int argc, char **argv);
 int		*sort_array(int *unsorted, int len);
 long long				ft_atoll(char *str);
+void			ft_putnbr_fd(int n, int fd);
+
 
 
 #endif
