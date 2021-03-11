@@ -12,7 +12,7 @@
 
 #include "../shared.h"
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup_ps(char *s1)
 {
 	int		i;
 	int		j;

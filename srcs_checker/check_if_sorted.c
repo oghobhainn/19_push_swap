@@ -12,13 +12,16 @@
 
 #include "checker.h"
 
-int		check_if_sorted(t_check *c)
+int					check_if_sorted(t_check *c)
 {
 	int				i;
 
 	i = 0;
 	if (c->len_a != c->init_len_a)
+	{
+		write(1, "KO\n", 3);
 		return (0);
+	}
 	while (i < c->len_a - 1)
 	{
 		if (c->stack_a[i] == c->stack_a[i + 1])
@@ -28,8 +31,12 @@ int		check_if_sorted(t_check *c)
 			ft_exit("There are duplicates in the list !", 2);
 		}
 		if (c->stack_a[i] > c->stack_a[i + 1])
+		{
+			write(1, "KO\n", 3);
 			return (0);
+		}
 		i++;
 	}
+	write(1, "OK\n", 3);
 	return (1);
 }

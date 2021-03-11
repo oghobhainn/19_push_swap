@@ -6,7 +6,7 @@
 /*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:42:39 by cmcgahan          #+#    #+#             */
-/*   Updated: 2021/03/08 16:43:00 by cmcgahan         ###   ########.fr       */
+/*   Updated: 2021/03/11 16:39:49 by cmcgahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ void	print_stack(t_check *c)
 	write(1, "------------------\n", 20);
 	while (i < c->len_a || i < c->len_b)
 	{
-		// change the printf
 		if (i < c->len_a && i < c->len_b)
-			printf("    [%d] 	|| 	[%d]\n", c->stack_a[i], c->stack_b[i]);
+			ft_printf("    [%d] 	|| 	[%d]\n", c->stack_a[i], c->stack_b[i]);
 		else if (i < c->len_a)
-			printf("    [%d] 	||\n", c->stack_a[i]);
+			ft_printf("    [%d] 	||\n", c->stack_a[i]);
 		else if (i < c->len_b)
-			printf("        	|| 	[%d]\n", c->stack_b[i]);
+			ft_printf("        	|| 	[%d]\n", c->stack_b[i]);
 		i++;
 	}
-	printf("\n");
+	ft_printf("\n");
 }

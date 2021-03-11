@@ -23,11 +23,11 @@ int		*sort_array(int *unsorted, int len)
 	i = -1;
 	while (++i < len)
 		sorted[i] = unsorted[i];
-	i = 0;
-	while (i < len)
+	i = -1;
+	while (++i < len)
 	{
-		j = i + 1;
-		while (j < len)
+		j = i;
+		while (++j < len)
 		{
 			if (sorted[i] > sorted[j])
 			{
@@ -35,10 +35,7 @@ int		*sort_array(int *unsorted, int len)
 				sorted[i] = sorted[j];
 				sorted[j] = tmp;
 			}
-			j++;
 		}
-		i++;
 	}
 	return (sorted);
 }
-

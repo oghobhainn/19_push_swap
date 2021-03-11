@@ -12,7 +12,7 @@
 
 #include "../shared.h"
 
-int		init_struct(t_check *c, int argc, char **argv)
+int		init_struct(t_check *c, char **argv)
 {
 	c->len_a = count_args(argv);
 	c->init_len_a = c->len_a;

@@ -6,60 +6,11 @@
 /*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:26:21 by cmcgahan          #+#    #+#             */
-/*   Updated: 2021/03/08 16:45:26 by cmcgahan         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:58:13 by cmcgahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-
-void				check_overflows(char **args)
-{
-	int				i;
-	long long		test;
-
-	i = 0;
-	while (args[i])
-	{
-		if (ft_strlen(args[i]) > ft_strlen("-2147483648"))
-			ft_exit("Error: wrong arg (possibly overflow)\n", 2);
-		else if (ft_strlen(args[i]) == ft_strlen("-2147483648"))
-		{
-			if (args[i][0] != '-' || args[i][0] != '+')
-				ft_exit("Error: wrong arg (possibly overflow)\n", 2);
-			else
-			{
-				if (ft_atoll(args[i]) > INT_MAX || ft_atoll(args[i]) < INT_MIN)
-					ft_exit("Error: overflow\n", 2);
-			}
-		}
-		i++;
-	}
-}
-
-void			check_duplicates(t_check *c)
-{
-	int			i;
-
-	i = 0;
-	while (i < c->len_a - 1)
-	{
-		if (c->stack_a[i] == c->stack_a[i + 1])
-		{
-			free(c->stack_a);
-			free(c->stack_b);
-			ft_exit("Error: Duplicates\n", 2);
-		}
-		i++;
-	}
-}
-
-void			pre_check_args(t_check *c)
-{
-	int			*sorted;
-
-	sorted = sort_array(c->stack_a, c->len_a);
-	check_duplicates(c);
-}
 
 void			checker(t_check *c)
 {
@@ -71,7 +22,8 @@ void			checker(t_check *c)
 	again = 1;
 	while (again > 0)
 	{
-		print_stack(c);
+		if (c->flag_v == 1)
+			print_stack(c);
 		again = get_next_line(0, &action);
 		if (again != 0 && is_valid(action) == 0)
 		{
@@ -85,35 +37,32 @@ void			checker(t_check *c)
 			free(action);
 		}
 	}
-	printf("we used [%d] actions to sort it\n", nb_action);
-	if (check_if_sorted(c) == 1)
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	if (c->flag_c == 1)
+		print_nb_actions(nb_action);
 }
 
-int		main(int argc, char **argv)
+void			init_check(t_check *c)
 {
-	char		**args;
-	char		**split_args;
-	t_check 	c;
+	c->init_len_a = 0;
+	c->len_a = 0;
+	c->len_b = 0;
+	c->flag_v = 0;
+	c->flag_c = 0;
+}
 
-	if (argc < 2)
-		ft_exit("Error: No args\n", 2);
-	if (argc == 2)
-	{
-		if (!(args = ft_split(argv[1], ' ')))
-			return (0);
-	}
-	else
-	{
-		args = argv + 1;
-	}
+int				main(int argc, char **argv)
+{
+	t_check		c;
+	char		**args;
+
+	init_check(&c);
+	args = args_and_flags(argc, argv, &c);
 	check_overflows(args);
-	if (init_struct(&c, argc, args) == 0)
+	if (init_struct(&c, args) == 0)
 		ft_exit("couldn't init struct\n", 2);
 	pre_check_args(&c);
 	checker(&c);
+	check_if_sorted(&c);
 	free(c.stack_a);
 	free(c.stack_b);
 	return (0);

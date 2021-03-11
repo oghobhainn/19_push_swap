@@ -6,7 +6,7 @@
 /*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:51:35 by cmcgahan          #+#    #+#             */
-/*   Updated: 2021/03/08 16:52:50 by cmcgahan         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:05:09 by cmcgahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_big
 {
 	int			i;
 	int			j;
+	int			p0;
 	int			p1;
 	int			p2;
 	int			p3;
@@ -72,13 +73,16 @@ int				pa(t_check *c);
 int				*sort_array(int *unsorted, int len);
 int				find_median(int *sorted, int len, t_ps *ps);
 
+void			case_two(int *stack, int n, int ab);
 void			case_three(int *stack, int n, int ab);
-void			r_case_three(int *stack, int n, int ab);
 void			case_six(t_check *c, int n);
-void			case_hundred(t_check *c, int n);
 void			case_big(t_check *c, int n);
+void			sort_part(t_check *c, int n, t_big *b);
 
-int			find_max(int *stack, int n);
-int			find_min(int *stack, int n);
+int				find_max(int *stack, int n);
+int				find_min(int *stack, int n);
+void			find_pivots(int *sorted, int len, t_big *b);
+void			min_or_max_big(int len, t_big *b);
+void			min_or_max_big2(int len, t_big *b, int min_dist, int max_dist);
 
 #endif

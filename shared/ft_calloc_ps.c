@@ -12,7 +12,7 @@
 
 #include "../shared.h"
 
-void		*ft_calloc(int count, int size)
+void		*ft_calloc_ps(int count, int size)
 {
 	int		i;
 	char	*calloc;

@@ -6,7 +6,7 @@
 /*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:51:04 by cmcgahan          #+#    #+#             */
-/*   Updated: 2021/03/08 16:51:23 by cmcgahan         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:06:01 by cmcgahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,16 @@ int		check_if_sorted(t_check *c)
 	return (1);
 }
 
-void	push_swap(t_check *c, int algo)
+void	push_swap(t_check *c)
 {
 	if (check_if_sorted(c) == 1)
 		return ;
-	if (c->init_len_a <= 3)
-	{
+	if (c->init_len_a == 2)
+		case_two(c->stack_a, c->init_len_a, 1);
+	else if (c->init_len_a == 3)
 		case_three(c->stack_a, c->init_len_a, 1);
-	}
 	else if (c->init_len_a <= 6)
-	{
 		case_six(c, c->init_len_a);
-	}
-//	else if (c->init_len_a <= 100)
-//	{
-//		case_hundred(c, c->init_len_a);
-//	}
 	else
 		case_big(c, c->init_len_a);
 }
@@ -58,7 +52,6 @@ int		main(int argc, char **argv)
 {
 	t_check		c;
 	char		**args;
-	char		**split_args;
 	int			algo;
 
 	algo = 0;
@@ -73,9 +66,9 @@ int		main(int argc, char **argv)
 	{
 		args = argv + 1;
 	}
-	if (init_struct(&c, argc, args) == 0)
+	if (init_struct(&c, args) == 0)
 		ft_exit("couldn't init struct\n", 2);
-	push_swap(&c, algo);
+	push_swap(&c);
 	free(c.stack_a);
 	free(c.stack_b);
 	return (0);

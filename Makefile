@@ -1,103 +1,91 @@
-PUSH_SWAP =		push_swap
-CHECKER =		checker
-NAME = $(PUSH_SWAP) $(CHECKER)
+NAME_PS = push_swap
+NAME_C = checker
 
-COMP =			gcc -Wall -Wextra -Werror -I includes
-OBJ_DIR =		obj/
-S_SRC_DIR =		shared/
-P_SRC_DIR =		push_swap/
-C_SRC_DIR =		checker/
+MLX = ./mlx/libmlx.a
 
-S_SRC =			check_args.c \
-				count_args.c \
-				exit.c \
-				ft_atoi.c \
-				ft_calloc.c \
-				ft_isdigit.c \
-				ft_isin.c \
-				ft_putchar_fd.c \
-				ft_putnbr_fd.c \
-				ft_putstr_fd.c \
-				ft_split.c \
-				ft_strchr.c \
-				ft_strcmp.c \
-				ft_strcpy.c \
-				ft_strdel.c \
-				ft_strdup.c \
-				ft_substr.c \
-				get_next_line.c \
-				get_stack.c \
-				init_struct.c \
-				malloc_and_fill.c \
-				print_stack.c
+LIBFT = ./libft/libft.a
 
-P_SRC_DIR =		push_swap.c
+SRC_S =	shared/check_args.c \
+		shared/count_args.c \
+		shared/exit.c \
+		shared/ft_atoi_ps.c \
+		shared/ft_atol.c \
+		shared/ft_calloc_ps.c \
+		shared/ft_isdigit.c \
+		shared/ft_isin.c \
+		shared/ft_putchar_fd.c \
+		shared/ft_putnbr_fd.c \
+		shared/ft_putstr_fd.c \
+		shared/ft_split.c \
+		shared/ft_strchr.c \
+		shared/ft_strcmp.c \
+		shared/ft_strcpy.c \
+		shared/ft_strdel.c \
+		shared/ft_strlen.c \
+		shared/ft_strdup_ps.c \
+		shared/ft_substr.c \
+		shared/get_next_line.c \
+		shared/get_stack.c \
+		shared/init_struct.c \
+		shared/malloc_and_fill.c \
+		shared/print_stack.c \
+		shared/sort_array.c
 
-C_SRC_DIR =		actions.c \
-				check_if_sorted.c \
-				checker.c \
-				pab_action.c \
-				rab_action.c \
-				rrab_action.c \
-				sab_action.c
+SRC_P = srcs_push_swap/case_big2.c \
+		srcs_push_swap/case_big.c \
+		srcs_push_swap/case_six.c \
+		srcs_push_swap/case_three.c \
+		srcs_push_swap/find_median.c \
+		srcs_push_swap/minmax.c \
+		srcs_push_swap/pab.c \
+		srcs_push_swap/push_swap.c \
+		srcs_push_swap/rab.c \
+		srcs_push_swap/rrab.c \
+		srcs_push_swap/sab.c \
+		srcs_push_swap/sort_part.c
 
-S_OBJ =			$(S_SRC:%.c=%.o)
-P_OBJ =			$(P_SRC:%.c=%.o)
-C_OBJ =			$(C_SRC:%.c=%.o)
-OBJ =			$(S_OBJ) $(P_OBJ) $(C_OBJ)
+SRC_C = srcs_checker/action.c \
+		srcs_checker/args_and_flags.c \
+		srcs_checker/check.c \
+		srcs_checker/check_if_sorted.c \
+		srcs_checker/checker.c \
+		srcs_checker/pab_action.c \
+		srcs_checker/print_nb_actions.c \
+		srcs_checker/rab_action.c \
+		srcs_checker/rrab_action.c \
+		srcs_checker/sab_action.c
 
-S_SRC_PATH =	$(S_SRC:%=$(S_SRC_DIR)%)
-P_SRC_PATH =	$(P_SRC:%=$(P_SRC_DIR)%)
-C_SRC_PATH =	$(C_SRC:%=$(C_SRC_DIR)%)
-SRC_PATH = 		$(S_SRC_PATH) $(P_SRC_PATH) $(C_SRC_PATH)
+OBJ_S = $(SRC_S:.c=.o)
+OBJ_P = $(SRC_P:.c=.o)
+OBJ_C = $(SRC_C:.c=.o)
 
-S_OBJ_PATH =	$(addprefix $(OBJ_DIR), $(S_OBJ))
-P_OBJ_PATH =	$(addprefix $(OBJ_DIR), $(P_OBJ))
-C_OBJ_PATH =	$(addprefix $(OBJ_DIR), $(C_OBJ))
-OBJ_PATH =		$(S_OBJ_PATH) $(P_OBJ_PATH) $(C_OBJ_PATH)
+FT_FLAGS = -Wall -Wextra -Werror
 
-all:			color 
-				$(OBJ_DIR) $(NAME)
-				@echo "\\n\033[32;1m PUSH_SWAP AND CHECKER COMPLETE \033[0m \\n"
+all:
+	@make -C ./shared/ft_printf
+	@gcc -o $(NAME_PS) $(FT_FLAGS) $(SRC_S) $(SRC_P) ./shared/ft_printf/libftprintf.a
+	@gcc -o $(NAME_C) $(FT_FLAGS) $(SRC_S) $(SRC_C) ./shared/ft_printf/libftprintf.a
+	@echo "Compilation checker\t\t\033[0;32m[OK]\033[0m"
+	@echo "Compilation push_swap\t\t\033[0;32m[OK]\033[0m"
 
-$(OBJ_DIR):
-				@mkdir -p $(OBJ_DIR)
-				echo Create: Object directory
 
-$(NAME):		$(OBJ_PATH)
-				@gcc $(S_OBJ_PATH) $(P_OBJ_PATH) *.a -o push_swap \
-				@gcc $(S_OBJ_PATH) $(C_OBJ_PATH) *.a -o checker
-				
-$(S_OBJ_PATH):	$(S_SRC_PATH)
-				@$(MAKE) $(S_OBJ)
+clean:
+	@make -C ./shared/ft_printf clean
+	@rm -rf $(OBJ_S)
+	@rm -rf $(OBJ_C)
+	@rm -rf $(OBJ_P)
+	@echo "Cleaning Objects\t\t\033[0;32m[OK]\033[0m"
 
-$(P_OBJ_PATH):	$(P_SRC_PATH)
-				@$(MAKE) $(P_OBJ)
+fclean:
+	@rm -rf $(OBJ_S)
+	@rm -rf $(OBJ_C)
+	@rm -rf $(OBJ_P)
+	@echo "Cleaning Objects\t\t\033[0;32m[OK]\033[0m"
+	@make -C ./shared/ft_printf fclean
+	@rm -rf ${NAME_PS}
+	@rm -rf ${NAME_C}
+	@echo "Cleaning exec\t\t\t\033[0;32m[OK]\033[0m"
 
-$(C_OBJ_PATH):	$(C_SRC_PATH)
-				@$(MAKE) $(C_OBJ)
+re: fclean all
 
-$(S_OBJ):		$(LIBFT_A)
-				@echo Create: $(@:obj/%=%)"\x1b[1A\x1b[M"
-				@$(COMP) $(OBJ_DIR)$@ $(S_SRC_DIR)$(@:%.o=%.c)
-$(C_OBJ):		$(LIBFT_A)
-				@echo Create: $(@:obj/%=%)"\x1b[1A\x1b[M"
-				@$(COMP) $(OBJ_DIR)$@ $(C_SRC_DIR)$(@:%.o=%.c)
-$(P_OBJ):		$(LIBFT_A)
-				@echo Create: $(@:obj/%=%)"\x1b[1A\x1b[M"
-				@$(COMP) $(OBJ_DIR)$@ $(P_SRC_DIR)$(@:%.o=%.c)
-
-colour:
-				@echo "\x1b[36m""\x1b[1A\x1b[M"
-
-clean:			color
-				@/bin/rm -rf $(OBJ_DIR)
-				@echo "\\n\033[32;1m Cleaned libft object files \033[0m"
-
-fclean:			clean
-				@/bin/rm -f $(PUSH_SWAP) $(CHECKER)
-				@echo "\\n\033[32;1m Cleaned $(NAME) \033[0m \\n"
-
-re: 			fclean all
-
-.PHONY:			all clean flcean re color
+phony: all clean fclean re

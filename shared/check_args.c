@@ -12,11 +12,6 @@
 
 #include "../shared.h"
 
-int		check_doubles(int *stack)
-{
-	return (1);
-}
-
 int		check_if_number(char *s)
 {
 	int	i;

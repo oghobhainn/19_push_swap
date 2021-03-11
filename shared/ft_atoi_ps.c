@@ -12,7 +12,7 @@
 
 #include "../shared.h"
 
-int						ft_atoi(char *str)
+int						ft_atoi_ps(char *str)
 {
 	int					i;
 	int					sign;

@@ -20,7 +20,10 @@ void		case_six(t_check *c, int n)
 	while (++i < n - 3)
 		pb(c);
 	case_three(c->stack_a, 3, 1);
-	case_three(c->stack_b, n - 3, 2);
+	if (n == 5)
+		case_two(c->stack_b, n - 3, 2);
+	else
+		case_three(c->stack_b, n - 3, 2);
 	while (c->len_b > 0)
 	{
 		if (c->stack_b[0] <= c->stack_a[0])
@@ -35,7 +38,5 @@ void		case_six(t_check *c, int n)
 	}
 	while (!(c->stack_a[0] <= c->stack_a[1]
 				&& c->stack_a[0] <= c->stack_a[c->len_a - 1]))
-	{
 		rab(c->stack_a, c->len_a, 1);
-	}
 }
